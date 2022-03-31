@@ -5,6 +5,7 @@ from sqlalchemy.testing.suite import *
 from sqlalchemy.testing.suite import ComponentReflectionTest as _ComponentReflectionTest
 from sqlalchemy.testing.suite import ExceptionTest as _ExceptionTest
 from sqlalchemy.testing.suite import OrderByLabelTest as _OrderByLabelTest
+from sqlalchemy.testing.suite import DifficultParametersTest as _DifficultParametersTest
 from sqlalchemy import inspect
 from sqlalchemy.testing import fixtures, eq_, is_
 from sqlalchemy import testing
@@ -17,6 +18,12 @@ import sqlalchemy_monetdb.monetdb_types as mtypes
 
 
 major, minor = [int(i) for i in sa.__version__.split('.')[:2]]
+
+class DifficultParametersTest(_DifficultParametersTest):
+    def test_round_trip(self, name, connection, metadata):
+        """Skip these for now, MonetDB does not support having a % in the column name"""
+        pass
+
 
 
 class ComponentReflectionTest(_ComponentReflectionTest):
